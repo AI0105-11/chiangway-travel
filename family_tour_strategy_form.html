@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>清微旅行 ・ 親子包車戰略執行確認單（Haines 內部）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: #f5f5f5;
+  color: #111;
+  line-height: 1.7;
+  padding: 20px;
+}
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 40px 48px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+h1 { font-size: 22px; text-align: center; margin-bottom: 6px; }
+.subtitle { text-align: center; font-size: 16px; font-weight: 700; color: #b45309; margin-bottom: 4px; }
+.sub-note { text-align: center; color: #808080; font-size: 12px; margin-bottom: 20px; }
+.meta { color: #808080; font-size: 12px; margin-bottom: 6px; }
+.part-title {
+  font-size: 20px; font-weight: 700; padding: 12px 0;
+  border-top: 3px solid #2563eb; border-bottom: 1px solid #e5e7eb;
+  margin: 36px 0 20px; color: #1e40af;
+}
+.part-title.part2 { border-top-color: #d97706; color: #b45309; }
+.part-title.part3 { border-top-color: #059669; color: #047857; }
+h2 { font-size: 16px; font-weight: 700; margin: 24px 0 10px; color: #111; }
+h3 { font-size: 14px; font-weight: 700; margin: 14px 0 6px; }
+p { margin: 6px 0; font-size: 14px; }
+.explain { color: #808080; font-size: 12px; margin: 6px 0; }
+ul { margin: 6px 0 6px 20px; }
+li { font-size: 14px; margin: 3px 0; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+th, td { border: 1px solid #d1d5db; padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: #dbeafe; font-weight: 700; }
+tr:nth-child(even) td { background: #f9fafb; }
+a { color: #2563eb; word-break: break-all; }
+.block { background: #f9fafb; border-left: 3px solid #d1d5db; padding: 10px 14px; margin: 8px 0; font-size: 13px; white-space: pre-wrap; }
+.block.highlight { border-left-color: #d97706; background: #fef3c7; }
+.block.key { border-left-color: #dc2626; background: #fee2e2; }
+.block.new { border-left-color: #10b981; background: #ecfdf5; }
+.q-section {
+  background: #fffbeb; border: 1px solid #fde68a;
+  border-radius: 8px; padding: 16px 20px; margin: 14px 0;
+}
+.q-title { font-size: 15px; font-weight: 700; color: #92400e; margin-bottom: 8px; }
+.radio-group, .check-group { margin: 6px 0; }
+.radio-group label, .check-group label {
+  display: block; padding: 4px 0; font-size: 14px; cursor: pointer;
+}
+.radio-group input, .check-group input { margin-right: 8px; transform: translateY(1px); }
+.inline-input {
+  border: none; border-bottom: 1px solid #9ca3af; background: transparent;
+  padding: 2px 6px; width: 280px; font-size: 14px; font-family: inherit;
+}
+.inline-input:focus { outline: none; border-bottom-color: #2563eb; }
+.inline-input.wide { width: 450px; }
+textarea {
+  width: 100%; min-height: 80px; padding: 8px;
+  border: 1px solid #d1d5db; border-radius: 4px;
+  font-family: inherit; font-size: 13px; resize: vertical;
+}
+.action-bar {
+  position: sticky; bottom: 20px; margin: 30px auto 0; max-width: 900px;
+  text-align: center; padding: 14px; background: #fff;
+  border: 1px solid #e5e7eb; border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+.btn {
+  padding: 12px 32px; background: #2563eb; color: #fff;
+  border: none; border-radius: 6px; font-size: 15px;
+  font-weight: 700; cursor: pointer; font-family: inherit;
+}
+.btn:hover { background: #1d4ed8; }
+.btn:active { transform: scale(.97); }
+.btn-hint { font-size: 12px; color: #6b7280; margin-top: 8px; }
+.meta-row {
+  display: flex; gap: 10px; margin: 10px 0; flex-wrap: wrap;
+}
+.meta-row label { font-size: 13px; color: #374151; }
+.meta-row input {
+  flex: 1; padding: 6px 10px; border: 1px solid #d1d5db;
+  border-radius: 4px; font-family: inherit; font-size: 13px; min-width: 180px;
+}
+.tag {
+  display: inline-block; padding: 2px 8px; border-radius: 12px;
+  font-size: 11px; font-weight: 700;
+}
+.tag-red { background: #fee2e2; color: #991b1b; }
+.tag-green { background: #ecfdf5; color: #047857; }
+.tag-amber { background: #fef3c7; color: #92400e; }
+@media print {
+  body { background: #fff; padding: 0; }
+  .page { box-shadow: none; border-radius: 0; padding: 20px; }
+  .action-bar { display: none; }
+  .q-section { break-inside: avoid; }
+}
+.pdf-mode .action-bar { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="page" id="page">
+
+<h1>清微旅行 Chiangway Travel</h1>
+<div class="subtitle">🍀 親子包車戰略執行確認單</div>
+<div class="sub-note">Haines 內部決策用 ・ 以「清邁親子包車」為主軸的戰略重新聚焦</div>
+
+<p class="meta">建檔日期：2026-04-17 ｜ 整合來源：25組關鍵字雙視角搜尋結果 + 資料彙整與優化順序</p>
+
+<div class="meta-row">
+  <label>填寫人：</label>
+  <input type="text" id="ownerName" placeholder="Haines">
+  <label>日期：</label>
+  <input type="text" id="ownerDate" placeholder="2026-04-__">
+</div>
+
+<!-- ================ PART 1 ================ -->
+<div class="part-title">PART 1 — 戰略重新定位（資料盤點）</div>
+
+<h2>一、主軸鎖定</h2>
+<div class="block highlight">
+核心關鍵字：<b>「清邁 親子包車」</b>（B4）
+
+這不是為了衝榜 Maps，而是將「親子包車」視為品牌核心訴求，統攝所有相關詞的戰略資源分配。</div>
+
+<h2>二、從 25 組掃描抓出的關鍵事實</h2>
+
+<table>
+  <tr><th>關鍵字</th><th>台灣視角</th><th>清邁視角</th><th>戰略意義</th></tr>
+  <tr>
+    <td><b>B4 清邁 親子包車</b></td>
+    <td>⭐ 官網自然結果 <b>#2</b></td>
+    <td>MP 全景點主導、清微未進前 6</td>
+    <td>TW 官網 SEO 已贏<br>CM Maps 不是戰場</td>
+  </tr>
+  <tr>
+    <td>C5 清微旅行 親子</td>
+    <td>KP 觸發</td>
+    <td><b>#6</b>（景點/飯店擠下）</td>
+    <td>Google 把「親子」解讀成景點</td>
+  </tr>
+  <tr>
+    <td>C4 清微旅行 包車</td>
+    <td>KP 觸發</td>
+    <td><b>#2</b>（漢清邁搶 #1）</td>
+    <td>漢清邁搶走品牌詞 → 急迫修正</td>
+  </tr>
+  <tr>
+    <td>B2 清邁 中文包車</td>
+    <td>推論無 MP</td>
+    <td>MP 9 筆、清微未進前 9</td>
+    <td>CM 主戰場、清微能搶</td>
+  </tr>
+  <tr>
+    <td>B3 清邁 台灣人 包車</td>
+    <td>推論無 MP</td>
+    <td>MP 9 筆、清微未進前 9</td>
+    <td>CM 差異化詞、清微能搶</td>
+  </tr>
+  <tr>
+    <td>A 類 9 組行前詞</td>
+    <td>全部無 MP、部落格主導</td>
+    <td>多為景點</td>
+    <td>❌ 非 GBP 戰場</td>
+  </tr>
+</table>
+
+<h2>三、三大戰場重排（以親子包車為核心重新分配資源）</h2>
+
+<table>
+  <tr><th>戰場</th><th>代表關鍵字</th><th>目前狀態</th><th>應投資源</th></tr>
+  <tr>
+    <td><span class="tag tag-green">P1</span> 官網 SEO（親子包車訴求）</td>
+    <td>清邁 親子包車、清邁 親子旅遊、親子 清邁</td>
+    <td>B4 官網 #2 ⭐ 已贏</td>
+    <td>持續產內容、維護、無需大修</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-red">P1 緊急</span> 品牌詞守衛</td>
+    <td>清微旅行 包車、清微旅行 親子</td>
+    <td>C4 #2、C5 #6 ⚠️ 被擠下</td>
+    <td>急迫做 GBP 類別 / 描述 / 服務項目</td>
+  </tr>
+  <tr>
+    <td><span class="tag tag-amber">P2</span> GBP 清邁當地類目詞</td>
+    <td>清邁 中文包車、清邁 台灣人 包車、清邁 中文導遊</td>
+    <td>CM 0/9 進前 10</td>
+    <td>P1 完成後衝榜</td>
+  </tr>
+</table>
+
+<div class="block key">
+<b>⚠️ 重要戰略反轉</b><br>
+原本 Step 7 規劃以「清邁視角 B 類衝進前 10」為 P2 核心目標。<br>
+但從補跑結果看：<b>清邁 親子包車 Maps 是景點戰場（Jungle Adventure Park / 清邁夜間動物園主導），清微永遠無法贏過景點本身</b>。<br>
+所以「親子包車」的 Maps 排名戰直接放棄，改以「品牌訴求 + 台灣官網 SEO + GBP 信任面板」三面向承擔。
+</div>
+
+<!-- ================ PART 2 ================ -->
+<div class="part-title part2">PART 2 — 執行項目 × 決策確認</div>
+<p class="explain">以下 10 組決策點，請針對每項勾選處置方式或補充說明。完成後點最下方按鈕匯出 PDF 回傳，Claude 會據此推進執行。</p>
+
+<!-- Q1 -->
+<div class="q-section">
+  <div class="q-title">Q1. 商家名稱策略</div>
+  <p class="explain">現況：「清微旅行」4 字，不含服務/地區詞。</p>
+  <p class="explain">B4 台灣官網 title 已含「清邁親子包車 2026」，建議 GBP 名稱維持純品牌，靠描述 / 類別 / 服務項目埋「親子包車」。</p>
+  <div class="radio-group">
+    <label><input type="radio" name="q1" value="A"><span>A. 維持「清微旅行」純品牌名（Claude 推薦，避免 Google 審查風險）</span></label>
+    <label><input type="radio" name="q1" value="B"><span>B. 改為「清微旅行 Chiangway Travel」（中英並列，擴英文搜尋）</span></label>
+    <label><input type="radio" name="q1" value="C"><span>C. 改為「清微旅行 親子包車」（強化訴求但有被 Google 要求改回的風險）</span></label>
+    <label><input type="radio" name="q1" value="D"><span>D. 其他：</span><input type="text" class="inline-input wide" id="q1_other" placeholder=""></label>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="q-section">
+  <div class="q-title">Q2. 商家描述首句主軸</div>
+  <p class="explain">現況首句：「清微旅行 Chiangway Travel 由台灣爸爸 Eric 與泰國媽媽 Min 在清邁在地經營...」</p>
+  <p>以親子包車為主軸的調整方向：</p>
+  <div class="radio-group">
+    <label><input type="radio" name="q2" value="A"><span>A. 首句改為「專做清邁親子包車的在地家庭 — 清微旅行 Chiangway Travel...」</span></label>
+    <label><input type="radio" name="q2" value="B"><span>B. 維持現行首句，但第二段加入「親子包車首選」強化字</span></label>
+    <label><input type="radio" name="q2" value="C"><span>C. 維持現行不變，靠服務項目承擔關鍵字埋藏</span></label>
+    <label><input type="radio" name="q2" value="D"><span>D. 其他想法：</span></label>
+  </div>
+  <textarea id="q2_note" placeholder="若有其他想調整的描述方向，例如想強調「合法家庭經營」「非代辦型」或其他主軸..."></textarea>
+</div>
+
+<!-- Q3 -->
+<div class="q-section">
+  <div class="q-title">Q3. GBP 次要類別新增（目前 0 個）</div>
+  <p class="explain">⚠️ 漢清邁搶走「清微旅行 包車」#1 的主因是他設了 2-3 個類別（旅行社 + 包車）。清微目前只有「旅遊業者」單一類別，Google 難以關聯到「包車 / 導遊」。</p>
+  <p>請勾選要新增的次類別（可複選）：</p>
+  <div class="check-group">
+    <label><input type="checkbox" name="q3" value="旅行社"><span>旅行社（Travel Agency）— 回應客戶痛點「是不是合法旅行社」</span></label>
+    <label><input type="checkbox" name="q3" value="租車服務"><span>租車服務（Car Rental Service）— 對應包車服務</span></label>
+    <label><input type="checkbox" name="q3" value="導遊"><span>導遊（Tour Guide）— 對應中文導遊/台灣導遊詞</span></label>
+    <label><input type="checkbox" name="q3" value="機場接送"><span>機場接送（Airport Shuttle Service）— 額外選項</span></label>
+    <label><input type="checkbox" name="q3" value="遊覽業者"><span>遊覽業者（Sightseeing Tour Operator）— 額外選項</span></label>
+  </div>
+  <p class="explain">🚨 特殊確認：清微有正式登記為「旅行社」嗎？若無，設「旅行社」類別可能被 Google 審核拒絕。</p>
+  <div class="radio-group">
+    <label><input type="radio" name="q3_legal" value="yes"><span>有正式旅行社登記，可以設「旅行社」類別</span></label>
+    <label><input type="radio" name="q3_legal" value="no"><span>無正式登記，不設「旅行社」改設其他</span></label>
+    <label><input type="radio" name="q3_legal" value="try"><span>不確定，先試設讓 Google 審核回報</span></label>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="q-section">
+  <div class="q-title">Q4. 服務項目重新分組（以親子包車為優先）</div>
+  <p class="explain">建議 16 項服務依新增類別分組，親子包車類置於最優先：</p>
+  <div class="block new">【租車服務】（首要類別）
+・清邁親子包車（置頂）
+・清邁包車
+・清邁一日包車
+・清邁多日包車
+・清邁中文包車 [新增]
+・清邁台灣人包車 [新增]
+
+【導遊】
+・中文旅遊協助
+・清邁中文導遊 [新增]
+・清邁台灣導遊 [新增]
+
+【旅行社】
+・機場接送
+・兒童座椅安排
+・旅遊諮詢 [新增]
+
+【旅遊業者 主類別】
+・清邁客製旅遊規劃
+・親子行程建議
+・清邁旅遊規劃
+・泰北深度規劃 [新增]</div>
+  <div class="radio-group">
+    <label><input type="radio" name="q4" value="A"><span>A. 同意此分組與新增項目</span></label>
+    <label><input type="radio" name="q4" value="B"><span>B. 想調整（見下方說明）：</span></label>
+  </div>
+  <textarea id="q4_note" placeholder="想移除、新增、或改順序的項目..."></textarea>
+</div>
+
+<!-- Q5 -->
+<div class="q-section">
+  <div class="q-title">Q5. 親子包車主題的照片補齊方向</div>
+  <p class="explain">目前 GBP 照片業主已有素材，但以親子包車為戰略主軸後，建議優先補以下類型。請勾選業主手上確實有的：</p>
+  <div class="check-group">
+    <label><input type="checkbox" name="q5" value="car_child_seat"><span>車內兒童座椅實景（展示安全配備）</span></label>
+    <label><input type="checkbox" name="q5" value="kids_in_car"><span>孩子在車內笑容 / 睡著畫面（真實溫馨感）</span></label>
+    <label><input type="checkbox" name="q5" value="family_eric_min"><span>Eric + Min + 1.5 歲女兒 家庭合照</span></label>
+    <label><input type="checkbox" name="q5" value="drop_off"><span>親子景點接送畫面（清邁夜間動物園 / 大象保育 等）</span></label>
+    <label><input type="checkbox" name="q5" value="route"><span>行程路途中的風景（芳縣 / 清萊 / 清邁古城）</span></label>
+    <label><input type="checkbox" name="q5" value="guide_with_kids"><span>導遊與孩子互動（強化「中文導遊 + 台灣人」差異化）</span></label>
+    <label><input type="checkbox" name="q5" value="vehicle_exterior"><span>車輛外觀 + 清微品牌 Logo</span></label>
+    <label><input type="checkbox" name="q5" value="customer_moments"><span>客戶授權分享的行程實景</span></label>
+  </div>
+  <p class="explain">目標：每類至少 3-5 張，總量 25+ 張。業主 IG/TikTok 有大量素材，搬運難度低。</p>
+</div>
+
+<!-- Q6 -->
+<div class="q-section">
+  <div class="q-title">Q6. 月度 GBP 貼文配置（每週 2 篇，月 8 篇）</div>
+  <p>以親子包車為主軸的貼文節奏建議：</p>
+  <div class="radio-group">
+    <label><input type="radio" name="q6" value="A"><span>A. 8 篇全部親子包車主題（景點接送、行程範例、車內時光、客戶回饋）</span></label>
+    <label><input type="radio" name="q6" value="B"><span>B. 6 篇親子包車 + 2 篇在地生活紀錄（Eric & Min 日常）</span></label>
+    <label><input type="radio" name="q6" value="C"><span>C. 4 親子包車 + 2 在地生活 + 2 客戶回饋（推薦，節奏平衡）</span></label>
+    <label><input type="radio" name="q6" value="D"><span>D. 其他配比：</span><input type="text" class="inline-input" id="q6_other" placeholder="親子XX篇 + 生活XX篇 + 客戶XX篇"></label>
+  </div>
+</div>
+
+<!-- Q7 -->
+<div class="q-section">
+  <div class="q-title">Q7. 排名掃描循環</div>
+  <p class="explain">已確認的實際掃描價值：C 類 6 組、B 類清邁 5 組、B4 台灣 1 組 = 每月 12 組。</p>
+  <div class="radio-group">
+    <label><input type="radio" name="q7" value="A"><span>A. 月 1 次掃描 12 組（推薦，資料密度足夠追趨勢）</span></label>
+    <label><input type="radio" name="q7" value="B"><span>B. 雙週 1 次掃描 12 組（密度加倍，能更快抓變化）</span></label>
+    <label><input type="radio" name="q7" value="C"><span>C. 月 1 次 + 季掃一次含 A 類 3 組樣本（確認 A 類模式仍穩定）</span></label>
+  </div>
+</div>
+
+<!-- Q8 -->
+<div class="q-section">
+  <div class="q-title">Q8. 對應「漢清邁中文旅行社」的競爭策略</div>
+  <p class="explain">漢清邁是唯一跨場域（台灣 SEO + 清邁 Maps）的競品，且搶走「清微旅行 包車」#1。</p>
+  <div class="radio-group">
+    <label><input type="radio" name="q8" value="A"><span>A. 純差異化（在地家庭 vs 傳統旅行社），不直接對比</span></label>
+    <label><input type="radio" name="q8" value="B"><span>B. 在部落格寫比較性內容（「跟家庭買行程 vs 跟旅行社買」）</span></label>
+    <label><input type="radio" name="q8" value="C"><span>C. 直接以「非代辦型」「合法家庭」字眼明確區隔（Q2 已含此意涵）</span></label>
+    <label><input type="radio" name="q8" value="D"><span>D. 其他：</span><input type="text" class="inline-input wide" id="q8_other" placeholder=""></label>
+  </div>
+</div>
+
+<!-- Q9 -->
+<div class="q-section">
+  <div class="q-title">Q9. 官網 B4 台灣 #2 的維護方式</div>
+  <p class="explain">清微官網「清邁親子包車 2026」頁目前在 Google 台灣自然搜尋 #2。要防止被擠下，需持續內容更新。</p>
+  <div class="radio-group">
+    <label><input type="radio" name="q9" value="A"><span>A. 每月 1 次微更新（更新日期、新增 FAQ、加一則客戶回饋）</span></label>
+    <label><input type="radio" name="q9" value="B"><span>B. 每季 1 次大修（更新年份、加新景點、補充行程案例）</span></label>
+    <label><input type="radio" name="q9" value="C"><span>C. 保持現狀、只做部落格持續產出</span></label>
+    <label><input type="radio" name="q9" value="D"><span>D. 其他：</span><input type="text" class="inline-input wide" id="q9_other" placeholder=""></label>
+  </div>
+</div>
+
+<!-- Q10 -->
+<div class="q-section">
+  <div class="q-title">Q10. 芳縣民宿 GBP 進場時機</div>
+  <p class="explain">業主原本提過希望優化芳縣民宿 GBP。本輪決策先不處理清微以外的項目。</p>
+  <div class="radio-group">
+    <label><input type="radio" name="q10" value="A"><span>A. 清微 P1 完成 3 個月後看數據再評估（Claude 推薦）</span></label>
+    <label><input type="radio" name="q10" value="B"><span>B. 清微 P1 完成後立刻並進處理民宿</span></label>
+    <label><input type="radio" name="q10" value="C"><span>C. 本輪完全不處理民宿</span></label>
+    <label><input type="radio" name="q10" value="D"><span>D. 先讓業主自己決定民宿優化需求再說</span></label>
+  </div>
+</div>
+
+<!-- ================ PART 3 ================ -->
+<div class="part-title part3">PART 3 — 執行順序與時程確認</div>
+
+<h2>建議執行順序（對應 Part 2 決策結果）</h2>
+
+<table>
+  <tr><th>週次</th><th>任務</th><th>執行者</th><th>關聯決策</th></tr>
+  <tr><td>W1</td><td>進 GBP 後台新增 3 個次類別</td><td>Haines</td><td>Q3</td></tr>
+  <tr><td>W1</td><td>排查「兒童 / 無障礙」後台錯誤</td><td>Haines</td><td>—</td></tr>
+  <tr><td>W2</td><td>商家描述替換（依 Q2 選定方向）</td><td>Claude 產文 → Haines 更新</td><td>Q2</td></tr>
+  <tr><td>W2</td><td>服務項目重新分組（依 Q4）</td><td>Haines</td><td>Q4</td></tr>
+  <tr><td>W3</td><td>照片補齊（依 Q5 勾選類別）</td><td>業主提供 → Haines 上傳</td><td>Q5</td></tr>
+  <tr><td>W3</td><td>GBP 網站欄位確認（rezio 移除）</td><td>Haines</td><td>—</td></tr>
+  <tr><td>W4</td><td>月度 8 篇貼文草稿交付（依 Q6）</td><td>Claude 提供</td><td>Q6</td></tr>
+  <tr><td>W4</td><td>排名掃描 v2 執行（12 組）</td><td>Claude</td><td>Q7</td></tr>
+  <tr><td>W5+</td><td>官網維護節奏啟動（依 Q9）</td><td>業主或外包</td><td>Q9</td></tr>
+  <tr><td>M3</td><td>效益評估 + 芳縣民宿評估（依 Q10）</td><td>Haines + Claude</td><td>Q10</td></tr>
+</table>
+
+<h2>關鍵監測指標（12 週後評估）</h2>
+
+<table>
+  <tr><th>指標</th><th>現況</th><th>12 週目標</th></tr>
+  <tr><td>C4「清微旅行 包車」CM</td><td>#2（漢清邁 #1）</td><td>✅ 搶回 #1</td></tr>
+  <tr><td>C5「清微旅行 親子」CM</td><td>#6（景點主導）</td><td>進前 3（品牌詞穩固）</td></tr>
+  <tr><td>B4「清邁 親子包車」TW 官網</td><td>#2</td><td>維持 #1-2</td></tr>
+  <tr><td>B 類清邁視角進前 10</td><td>0/5</td><td>至少 2/5</td></tr>
+  <tr><td>GBP 總互動（月）</td><td>~18</td><td>+30% → 23</td></tr>
+  <tr><td>Google 評論數</td><td>43</td><td>+10 → 53</td></tr>
+</table>
+
+<!-- ================ 補充意見 ================ -->
+<div class="q-section" style="background: #eff6ff; border-color: #bfdbfe;">
+  <div class="q-title" style="color: #1e40af;">Q11. 其他戰略補充意見</div>
+  <textarea id="q11_note" placeholder="若有以上 Q1-Q10 未涵蓋的戰略想法、對親子包車定位的補充意見、或想調整的執行節奏，請在這裡..."></textarea>
+</div>
+
+<!-- 簽名區 -->
+<h2 style="margin-top: 30px;">執行確認</h2>
+<div class="block">
+填寫完成後點最下方按鈕匯出 PDF。<br>
+Claude 收到 PDF 後會：<br>
+1. 依 Part 2 決策點逐項確認<br>
+2. 更新 05_pending_tasks.md 的執行順序<br>
+3. 啟動 W1 任務（若 Q3 有勾選次類別）
+</div>
+
+</div>
+
+<div class="action-bar">
+  <button class="btn" onclick="exportPDF()">匯出 PDF 回傳確認 ✓</button>
+  <p class="btn-hint">填寫完成後點按鈕，PDF 會下載到您的電腦</p>
+</div>
+
+<script>
+function exportPDF() {
+  document.body.classList.add('pdf-mode');
+  const element = document.getElementById('page');
+  const ownerName = document.getElementById('ownerName').value || 'Haines';
+  const filename = `清微旅行_親子包車戰略確認_${ownerName}_${new Date().toISOString().slice(0,10)}.pdf`;
+
+  // 將勾選 / 填寫的內容固化成靜態 HTML
+  document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(i => {
+    if (i.checked) { i.setAttribute('checked', 'checked'); } else { i.removeAttribute('checked'); }
+  });
+  document.querySelectorAll('input[type="text"]').forEach(i => {
+    i.setAttribute('value', i.value);
+  });
+  document.querySelectorAll('textarea').forEach(t => {
+    t.textContent = t.value;
+  });
+
+  const opt = {
+    margin: [10, 10, 10, 10],
+    filename: filename,
+    image: { type: 'jpeg', quality: 0.95 },
+    html2canvas: { scale: 2, useCORS: true, logging: false },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  };
+
+  html2pdf().set(opt).from(element).save().then(() => {
+    document.body.classList.remove('pdf-mode');
+  });
+}
+</script>
+
+</body>
+</html>
